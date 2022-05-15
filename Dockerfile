@@ -11,7 +11,7 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get purge
 
 RUN apt-get update
-RUN apt-get install maven
+RUN apt-get install maven -y
 RUN mvn package
 RUN mkdir -p pkg
 RUN mv target/demo.war pkg/demo.war
