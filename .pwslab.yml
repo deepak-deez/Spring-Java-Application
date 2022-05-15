@@ -15,5 +15,9 @@ docker-build:
   script:
     - apt-get update
     - apt-get install maven -y
+    - mvn package
+    - mkdir -p pkg
+    - mv target/demo.war pkg/demo.war
+    - docker build -t demo-java .
     - docker build -t hub-peerxp.vegaops.com/devops-assignment/java_270422_6420 .
     - docker push "$CI_REGISTRY_IMAGE$"
