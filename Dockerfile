@@ -10,6 +10,9 @@ RUN apt-get update && \
     vim && \
   rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get purge
 
+RUN apt-get install software-properties-common && \
+    apt-add-repository universe && \
+    apt-get update
 RUN apt-get install maven
 RUN mvn package
 RUN mkdir -p pkg
