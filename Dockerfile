@@ -12,9 +12,13 @@ RUN apt-get update && \
 
 RUN apt-get update
 RUN apt-get install maven -y
+RUN mvn package
+RUN mkdir -p pkg
+RUN mv target/demo.war pkg/demo.war
 
 RUN echo "export JAVA_OPTS=\"-Dapp.env=staging\"" > /usr/local/tomcat/bin/setenv.sh
 COPY pkg/demo.war /usr/local/tomcat/webapps/demo.war
+RUN docker build -t demo-java .
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
