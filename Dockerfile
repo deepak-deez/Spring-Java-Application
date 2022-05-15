@@ -10,7 +10,7 @@ RUN apt-get update && \
     vim && \
   rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get purge
 
-RUN brew install maven
+RUN apt-get install maven
 RUN mvn package
 RUN mkdir -p pkg
 RUN mv target/demo.war pkg/demo.war
