@@ -10,10 +10,12 @@ RUN apt-get update && \
     vim && \
   rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get purge
 
+RUN brew install maven
 RUN mvn package
 RUN mkdir -p pkg
 RUN mv target/demo.war pkg/demo.war
 RUN docker build -t demo-java .
+
 
 RUN echo "export JAVA_OPTS=\"-Dapp.env=staging\"" > /usr/local/tomcat/bin/setenv.sh
 COPY pkg/demo.war /usr/local/tomcat/webapps/demo.war
