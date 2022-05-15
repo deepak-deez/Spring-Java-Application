@@ -10,6 +10,9 @@ RUN apt-get update && \
     vim && \
   rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get purge
 
+RUN chmod +x ./bin/build && \
+    source ./bin/build
+
 RUN echo "export JAVA_OPTS=\"-Dapp.env=staging\"" > /usr/local/tomcat/bin/setenv.sh
 COPY pkg/demo.war /usr/local/tomcat/webapps/demo.war
 
