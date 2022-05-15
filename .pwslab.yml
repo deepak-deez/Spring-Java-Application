@@ -13,8 +13,6 @@ docker-build:
   # Default branch leaves tag empty (= latest tag)
   # All other branches are tagged with the escaped branch name (commit ref slug)
   script:
-    - apt-get update
-    - apt-get install maven -y
     - mvn package
     - mkdir -p pkg
     - mv target/demo.war pkg/demo.war
