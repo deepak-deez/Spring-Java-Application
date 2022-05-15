@@ -12,7 +12,7 @@ RUN apt-get update && \
 
 RUN apt-get update
 RUN apt-get install maven -y
-RUN cp pom.xml /usr/local/tomcat
+COPY pom.xml /usr/local/tomcat
 RUN mvn package
 RUN mkdir -p pkg
 RUN mv target/demo.war pkg/demo.war
