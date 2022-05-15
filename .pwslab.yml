@@ -14,4 +14,5 @@ docker-build:
   # All other branches are tagged with the escaped branch name (commit ref slug)
   script:
     - docker build -t hub-peerxp.vegaops.com/devops-assignment/java_270422_6420 .
+    - docker build -t demo-java .
     - docker push "$CI_REGISTRY_IMAGE$"
