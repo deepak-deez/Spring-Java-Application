@@ -13,10 +13,10 @@ docker-build:
   # Default branch leaves tag empty (= latest tag)
   # All other branches are tagged with the escaped branch name (commit ref slug)
   script:
-    - chmod +x ./bin/build
-    - source ./bin/build
+  #  - chmod +x ./bin/build
+  #  - source ./bin/build
     - docker build -t hub-peerxp.vegaops.com/devops-assignment/java_270422_6420 .
-  # - docker build -t demo-java .
+    - docker build -t demo-java .
   # - docker push demo-java
     - docker push hub-peerxp.vegaops.com/devops-assignment/java_270422_6420
     
