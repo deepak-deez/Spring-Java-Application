@@ -1,7 +1,5 @@
 #!/bin/bash -exu
 
-apt update
-apt install maven -y
 #apt-get update
 #apt-get install maven -y
 #cp pom.xml /usr/local/tomcat
