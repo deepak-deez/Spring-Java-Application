@@ -1,5 +1,8 @@
 #!/bin/bash -exu
 
+apt-get update
+apt-get install maven -y
+#cp pom.xml /usr/local/tomcat
 # brew install maven # for macosx
 mvn package # creates target/demo.war
 # Move the artifact into pkg so we do not have to send the whole target file
@@ -9,3 +12,6 @@ mkdir -p pkg
 mv target/demo.war pkg/demo.war
 
 docker build -t demo-java .
+
+
+
