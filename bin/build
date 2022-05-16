@@ -1,7 +1,9 @@
 #!/bin/bash -exu
 
-apt-get update
-apt-get install maven -y
+apt update
+apt install maven -y
+#apt-get update
+#apt-get install maven -y
 #cp pom.xml /usr/local/tomcat
 # brew install maven # for macosx
 mvn package # creates target/demo.war
