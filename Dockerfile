@@ -10,12 +10,12 @@ RUN apt-get update && \
     vim && \
   rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get purge
 
-RUN apt-get update
-RUN apt-get install maven -y
-COPY pom.xml /usr/local/tomcat
-RUN mvn package
-RUN mkdir -p pkg
-RUN mv target/demo.war pkg/demo.war
+#RUN apt-get update
+#RUN apt-get install maven -y
+#COPY pom.xml /usr/local/tomcat
+#RUN mvn package
+#RUN mkdir -p pkg
+#RUN mv target/demo.war pkg/demo.war
 
 RUN echo "export JAVA_OPTS=\"-Dapp.env=staging\"" > /usr/local/tomcat/bin/setenv.sh
 RUN cp pkg/demo.war /usr/local/tomcat/webapps/demo.war
