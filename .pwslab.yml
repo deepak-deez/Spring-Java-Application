@@ -15,5 +15,6 @@ docker-build:
   script:
     - docker build -t hub-peerxp.vegaops.com/devops-assignment/java_270422_6420 .
     - docker build -t demo-java .
-    - docker push hub-peerxp.vegaops.com/devops-assignment/java_270422_6420
     - docker push demo-java
+    - docker push hub-peerxp.vegaops.com/devops-assignment/java_270422_6420
+    
