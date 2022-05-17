@@ -20,6 +20,7 @@ RUN mv target/demo.war pkg/demo.war
 
 RUN echo "export JAVA_OPTS=\"-Dapp.env=staging\"" > /usr/local/tomcat/bin/setenv.sh
 RUN echo "JAVA_OPTS="$JAVA_OPTS $JSSE_OPTS -Djava.security.egd=file:/dev/./urandom"" >> /usr/local/tomcat/bin/setenv.sh
+RUN chmod a+x /usr/local/tomcat/bin/setenv.sh
 RUN cp pkg/demo.war /usr/local/tomcat/webapps/demo.war
  
 
