@@ -16,16 +16,10 @@ COPY pom.xml /usr/local/tomcat
 RUN mvn package
 RUN mkdir -p pkg
 RUN mv target/demo.war pkg/demo.war
-RUN cp pkg/demo.war /usr/local/tomcat/webapps/demo.war
 
 RUN echo "export JAVA_OPTS=\"-Dapp.env=staging\"" > /usr/local/tomcat/bin/setenv.sh
-#RUN echo "JAVA_OPTS="$JAVA_OPTS $JSSE_OPTS -Djava.security.egd=file:/dev/./urandom"" >> /usr/local/tomcat/bin/setenv.sh
-#JAVA_OPTS="$JAVA_OPTS $JSSE_OPTS
-#CATALINA_OPTS="$CATALINA_OPTS
-#RUN chmod a+x /usr/local/tomcat/bin/setenv.sh
-#CMD ["setenv.sh", "run]
+RUN cp pkg/demo.war /usr/local/tomcat/webapps/demo.war
 
- 
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]

@@ -1,5 +1,7 @@
+
 stages:
     - build
+    - deploy
 docker-build:
   # Use the official docker image.
   image: docker:latest
@@ -17,6 +19,31 @@ docker-build:
   #  - source ./bin/build
     - docker build -t hub-peerxp.vegaops.com/devops-assignment/java_270422_6420 .
     - docker build -t demo-java .
-  # - docker push demo-java
     - docker push hub-peerxp.vegaops.com/devops-assignment/java_270422_6420
-    
+deployment:
+  image: alpine:latest
+  stage: deploy
+  #variables:
+  #  SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+  before_script:
+    - apk update && apk add openssh-client
+    #- apk add --update openssh
+    #- eval $(ssh-agent -s)
+    #- echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+  script:
+    #- ssh -i $SSH_PRIVATE_KEY root@64.227.184.167
+    - echo "Starting to deploy"
+    #- chmod og= $SSH_PRIVATE_KEY
+    - echo $SSH_PRIVATE_KEY
+    - chmod 400 $SSH_PRIVATE_KEY
+    - ssh -i $SSH_PRIVATE_KEY -t -t root@64.227.184.167 "pwd" 
+    - ssh -i $SSH_PRIVATE_KEY  root@64.227.184.167 "docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"  $CI_REGISTRY"
+    #"$CI_REGISTRY_PASSWORD"
+    - ssh -i $SSH_PRIVATE_KEY root@64.227.184.167 "docker pull hub-peerxp.vegaops.com/devops-assignment/java_270422_6420:latest"
+    - ssh -i $SSH_PRIVATE_KEY root@64.227.184.167 "docker container rm -f my-app || true"
+    - ssh -i $SSH_PRIVATE_KEY root@64.227.184.167 "docker run -d -p 8080:8080 --name my-app hub-peerxp.vegaops.com/devops-assignment/java_270422_6420:latest"
+    #-o StrictHostKeyChecking=no
